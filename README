@@ -1,0 +1,100 @@
+
+DIFFERENT STROKES
+=================
+
+by Mark Zadel, 2006
+
+http://www.music.mcgill.ca/~zadel/
+
+zadel@music.mcgill.ca
+
+
+## Overview
+
+Different Strokes is a software system for performing music on a
+computer.  It aims to allow a performer to create much of his or
+her performance sequences on-stage instead of relying on prepared
+control material.
+
+The program resembles a freehand drawing application.  The drawn
+strokes create animated figures whose motion is mapped to sample
+playback.  The musician performs by assembling networks of
+strokes live, generating audio patterns.
+
+
+## Documentation
+
+Some documentation about the program is available at the main
+program site: http://www.music.mcgill.ca/~zadel/
+
+Currently, there's a conference article and a Master's thesis
+available.
+
+
+## Compiling and Running the Application
+
+The application was written and tested on Mac OSX 10.3.9 using
+GNU Make and g++ 3.3.  It probably won't work out of the box on
+other setups, but the code could probably be made to compile on
+other unix platforms with some amount of effort.
+
+To build the application, just unpack the source files and run
+make in the source directory.  The application has to be run in
+the terminal (for the time being) like so:
+
+    % ./ds
+
+
+## Specifying Samples
+
+You can point the application at your samples using the
+dssamples.txt file.  It should reside in the same directory as
+the application binary.  It contains sample filenames, one file
+per line.  Filenames can be specified with paths relative to the
+source directory, or with absolute paths.  You may specify up to
+eight samples in the dssamples.txt file.
+
+
+## Keystrokes
+
+The keyboard commands are
+
+  - 0: switch to silent stroke mode
+  - 1: switch to sample stroke 1 mode
+  - 2: switch to sample stroke 2 mode
+  - 3: switch to sample stroke 3 mode
+  - 4: switch to sample stroke 4 mode
+  - 5: switch to sample stroke 5 mode
+  - 6: switch to sample stroke 6 mode
+  - 7: switch to sample stroke 7 mode
+  - 8: switch to sample stroke 8 mode
+  - r: switch to removal mode (to erase strokes)
+
+Sample stroke 1 is the sample that was listed first in the
+dssamples.txt file.  Sample stroke 2 is the second one, and so
+on.
+
+
+## Watch Out For...
+
+  - Feedback loops -- you'll know when you trigger one.  The
+    whole interface locks up and gets unresponsive.  Go to the
+    terminal window where it's running and hit ctrl-c.  You just
+    have to avoid the sorts of shapes that trigger this feedback
+    for the moment.
+  - Clipping -- the audio doesn't do any compressing or anything,
+    so dense sets of samples clip easily.  Use quietish, not-so
+    dense samples.
+  - Moving the window -- don't move or resize the window when
+    there are any strokes on the screen.  It'll cause the
+    application to close.  Maximize the window before you start
+    working.
+
+These are all temporary problems that will be corrected in future
+revisions of the application.
+
+
+## Questions / Comments / Feedback
+
+Please send these to zadel@music.mcgill.ca.
+
