@@ -9,8 +9,6 @@
 
 #ifndef __MPI_AUDIOCALLBACK_H__
 #define __MPI_AUDIOCALLBACK_H__
-#include "Stk.h"
-#include "RtAudio.h"
 
 class MPI_AudioCallback
 {
@@ -18,7 +16,6 @@ class MPI_AudioCallback
   public:
 
     static int callback( char *buffer, int bufferSize, void *data );
-    static int callback2(void *outputBuffer, void* inputBuffer, unsigned int nBufferFrames, double streaTime, RtAudioStreamStatus status, void *data);
 
   private:
 

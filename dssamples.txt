@@ -1,7 +1,7 @@
-hello.wav
-vinylnoise_clip2.wav
-515_jenc_dengdeng.wav
-200hzsine.wav
-400hzsine.wav
-trumpet_clip_smaller.wav
-chirp.wav
+/Users/mark/mcgill/research/thesis/researchfiles/samples/vinylnoise_clip1.wav
+/Users/mark/mcgill/research/thesis/researchfiles/samples/vinylnoise_clip2.wav
+/Users/mark/mcgill/research/thesis/researchfiles/samples/v4.wav
+/Users/mark/mcgill/research/thesis/researchfiles/samples/515_jenc_dengdeng.wav
+/Users/mark/mcgill/research/thesis/researchfiles/samples/14829_Heigh-hoo_KimiMcl.aif
+/Users/mark/mcgill/research/thesis/researchfiles/generatewaves/200hzsine.wav
+/Users/mark/mcgill/research/thesis/researchfiles/generatewaves/400hzsine.wav

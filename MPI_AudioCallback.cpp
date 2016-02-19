@@ -25,16 +25,6 @@ int MPI_AudioCallback::callback( char *buffer, int bufferSize, void *data )
 
 }
 
-int MPI_AudioCallback::callback2(void *outputBuffer, void* inBuf, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void *data)
-{
-
-    // this class shouldn't rely on the application to grab the audio instance.
-    MPI_Audio& audioinstance = MPI_Application::getInstance().getAudio();
-    audioinstance.tickBuffer( (double*)outputBuffer , nBufferFrames );
-
-
-}
-
 MPI_AudioCallback::MPI_AudioCallback()
 {
     // empty

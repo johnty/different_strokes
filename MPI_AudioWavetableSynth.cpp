@@ -6,7 +6,6 @@
 #include "MPI_AudioWavetableSynth.h"
 
 #include "MPI_AudioWavetable.h"
-#include <cmath>
 
 MPI_AudioWavetableSynth::MPI_AudioWavetableSynth( MPI_Audio &audioinstance, MPI_AudioWavetable &wavetable ) :
     MPI_AudioSynth( audioinstance ),
