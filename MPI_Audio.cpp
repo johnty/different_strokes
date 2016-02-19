@@ -20,14 +20,21 @@ void MPI_Audio::start( void )
     // MPI_Application::getInstance().  the audio callback could fire and try
     // to call this before we're out of the MPI_Application constructor.
 
-    try {
-        audio_->setStreamCallback(&MPI_AudioCallback::callback, NULL);
-        audio_->startStream();
+  /*  try {
+       audio_->setStreamCallback(&MPI_AudioCallback::callback, NULL);
+       audio_->startStream();
     }
-    catch (RtError &error) {
+    catch (RtAudioError &error) {
         error.printMessage();
-    }
+    } */
+      // Set our stream parameters for output only.
 
+  try {
+    audio_->startStream();
+  }
+  catch ( RtAudioError& e ) {
+    std::cout << '\n' << e.getMessage() << '\n' << std::endl;
+  }
 }
 
 void MPI_Audio::addSynth( MPI_AudioSynth *synth )
@@ -95,30 +102,38 @@ MPI_Audio::MPI_Audio()
 
     int channels = 2;
     int sampleRate = 44100;
-    int bufferSize = 256;  // 256 sample frames
+    unsigned int bufferSize = 256;  // 256 sample frames
     int nBuffers = 4;      // number of internal buffers used by device
     int device = 0;        // 0 indicates the default or first available device
 
+    audio_ = new RtAudio();
+    RtAudio::StreamParameters params;
+    params.deviceId = audio_->getDefaultOutputDevice();
+    params.nChannels = 2;
+    params.firstChannel = 0;
+
+    double data[nBuffers];
+
     // allocate an RtAudio instance
     try {
-        audio_ = new RtAudio(device, channels, 0, 0, RTAUDIO_FLOAT64,
-                sampleRate, &bufferSize, nBuffers);
+        //audio_ = new RtAudio(device, channels, 0, 0, RTAUDIO_FLOAT64,
+        //        sampleRate, &bufferSize, nBuffers);
+        audio_->openStream(&params, NULL, RTAUDIO_FLOAT64, sampleRate, &bufferSize, &MPI_AudioCallback::callback2, (void *)&data);
     }
-    catch (RtError &error) {
-        error.printMessage();
+    catch (RtAudioError& e) {
+       e.printMessage();
+       exit(0);
     }
-
 }
 
 MPI_Audio::~MPI_Audio()
 {
-
     try {
         // Stop and close the stream
         audio_->stopStream();
         audio_->closeStream();
     }
-    catch (RtError &error) {
+    catch (RtAudioError &error) {
         error.printMessage();
     }
 

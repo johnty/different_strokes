@@ -267,7 +267,7 @@ void MPI_GUIRootWindow::registerCallbacks( void ) const
 
 void MPI_GUIRootWindow::createWindow( void ) const
 {
-#if 0
+#if 1 
     glutInitWindowSize(windowWidth, windowHeight);
     // FIXME hardcoded pos, name here
     glutInitWindowPosition(0, 0);

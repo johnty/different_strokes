@@ -11,7 +11,7 @@
 char unsigned const MPI_AudioWavetable::maxChannels_ = 32;
 
 MPI_AudioWavetable::MPI_AudioWavetable( std::string fileName, bool raw, bool doNormalize ) :
-    WvIn( fileName, raw, doNormalize )
+    FileWvIn( fileName, raw, doNormalize )
 {
 
     // normalise to something well below 1.0; it starts to clip at 1.0, so if
@@ -19,7 +19,7 @@ MPI_AudioWavetable::MPI_AudioWavetable( std::string fileName, bool raw, bool doN
     // of distortion.
     normalize( 0.1 );
 
-    lastFrameQueried_ = new float[ maxChannels_ ];
+    lastFrameQueried_ = new float[ data_.channels() ];
 }
 
 MPI_AudioWavetable::~MPI_AudioWavetable()
@@ -35,15 +35,15 @@ float MPI_AudioWavetable::getValueAtTime( float time, bool interpolate )
 
     getFrameAtTime( time, interpolate );
 
-    if ( channels_ == 1 )
+    if ( data_.channels() == 1 )
         return *lastFrameQueried_;
 
     float output = 0.0;
-    for ( unsigned int i=0; i<channels_; i++ ) {
+    for ( unsigned int i=0; i<data_.channels(); i++ ) {
         output += lastFrameQueried_[i];
     }
 
-    return output / channels_;
+    return output / data_.channels();
 
 }
 
@@ -55,8 +55,9 @@ float const* MPI_AudioWavetable::getFrameAtTime( float time, bool interpolate )
 
     // throw an error if chunking is on -- we don't handle it in this class
     if ( chunking_ ) {
-        errorString_ << "MPI_AudioWavetable::getFrameAtTime(): chunking not supported";
-        handleError( StkError::UNSPECIFIED );
+        //errorString_ << "MPI_AudioWavetable::getFrameAtTime(): chunking not supported";
+        printf( "MPI_AudioWavetable::getFrameAtTime(): chunking not supported" );
+        handleError( stk::StkError::UNSPECIFIED );
     }
 
     // FIXME what's the deal with these register designations?  in original
@@ -69,16 +70,16 @@ float const* MPI_AudioWavetable::getFrameAtTime( float time, bool interpolate )
     if (interpolate) {
         // Linear interpolation ... fractional part of time address.
         register float alpha = time - (float) index;
-        index *= channels_;
-        for (i=0; i<channels_; i++) {
+        index *= data_.channels();
+        for (i=0; i<data_.channels(); i++) {
             lastFrameQueried_[i] = data_[index];
-            lastFrameQueried_[i] += (alpha * (data_[index+channels_] - lastFrameQueried_[i]));
+            lastFrameQueried_[i] += (alpha * (data_[index+data_.channels()] - lastFrameQueried_[i]));
             index++;
         }
     }
     else {
-        index *= channels_;
-        for (i=0; i<channels_; i++)
+        index *= data_.channels();
+        for (i=0; i<data_.channels(); i++)
             lastFrameQueried_[i] = data_[index++];
     }
 

@@ -37,9 +37,9 @@ OBJS=MPI_main.o MPI_Point2D.o MPI_PolyLine.o MPI_Workspace.o \
 	MPI_CanonicalTimeArclengthMap.o \
 	MPI_PlayheadStroke.o MPI_FloatTrain.o MPI_FloatTrainConstIterator.o \
 	MPI_TimeFloat.o MPI_TrainElement.o MPI_TrainElementFactory.o \
-	MPI_TextLines.o MPI_CountPoweredElementsVisitor.o
+	MPI_TextLines.o MPI_CountPoweredElementsVisitor.o 
 
-STKOBJS=Stk.o RtAudio.o WvIn.o
+STKOBJS=Stk.o RtAudio.o FileWvIn.o FileRead.o
 OBJS+=$(STKOBJS)
 
 FLAGS=-c -Wall
@@ -47,6 +47,7 @@ FLAGS=-c -Wall
 #FLAGS+=-g
 # uncomment to enable optimization
 FLAGS+=-O3 -DNDEBUG
+LDFLAGS+=-pthread
 
 # flags for compiling STK files
 STKFLAGS=-D__GXX__ -D__MACOSX_CORE__

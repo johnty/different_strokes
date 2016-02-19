@@ -13,6 +13,7 @@
 
 #include "MPI_Point2D.h"
 #include "MPI_Event.h"
+#include <sys/time.h>
 
 class MPI_Scheduler;
 class MPI_Workspace;

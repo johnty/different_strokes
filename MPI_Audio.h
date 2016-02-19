@@ -10,6 +10,7 @@
 #define __MPI_AUDIO_H__
 
 #include <list>
+#include "RtAudio.h"
 
 class MPI_AudioSynth;
 class RtAudio;

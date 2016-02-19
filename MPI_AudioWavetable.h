@@ -15,9 +15,10 @@
 #ifndef __MPI_AUDIOWAVETABLE_H__
 #define __MPI_AUDIOWAVETABLE_H__
 
-#include "WvIn.h"
+#include "FileWvIn.h"
+#include "Stk.h"
 
-class MPI_AudioWavetable : public WvIn
+class MPI_AudioWavetable : public stk::FileWvIn
 {
 
   public:
